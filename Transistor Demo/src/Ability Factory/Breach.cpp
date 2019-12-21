@@ -3,6 +3,7 @@
 
 namespace Breach {
     void Breach::on_enter() {
+        std::cout << "Entering Breach!" << std::endl;
         // VFX for Breach on Enter here...
         m_CountDown = m_CountDownMax;
     }

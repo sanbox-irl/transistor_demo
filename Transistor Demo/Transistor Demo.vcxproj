@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Ability Factory\Help.cpp" />
     <ClCompile Include="src\Ability Factory\Ability.cpp" />
     <ClCompile Include="src\Ability Factory\Breach.cpp" />
     <ClCompile Include="src\Ability Factory\Spark.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Ability Factory\Help.h" />
     <ClInclude Include="src\Ability Factory\Ability.h" />
     <ClInclude Include="src\Ability Factory\Breach.h" />
     <ClInclude Include="src\Ability Factory\Spark.h" />

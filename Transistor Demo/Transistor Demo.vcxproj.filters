@@ -30,6 +30,9 @@
     <ClCompile Include="src\Ability Factory\UpgradeAbilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Ability Factory\Help.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Ability Factory\Ability.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Ability Factory\UpgradeAbilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ability Factory\Help.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

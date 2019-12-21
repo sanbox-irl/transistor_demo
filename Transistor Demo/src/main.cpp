@@ -25,6 +25,9 @@ Ability* ability_factory(const AbilityName& ability_name, const AbilityName& upg
         case AbilityName::Spark:
             ability = new Spark::Spark();
             break;
+        case AbilityName::Help:
+            ability = new Help::Help();
+            break;
         case AbilityName::NONE:
             // Temp exception handling
             throw "No None for main ability!";
@@ -39,6 +42,9 @@ Ability* ability_factory(const AbilityName& ability_name, const AbilityName& upg
             break;
         case AbilityName::Spark:
             Spark::upgrade_ability(ability);
+            break;
+        case AbilityName::Help:
+            Help::upgrade_ability(ability);
             break;
         case AbilityName::NONE:
             // No work here to do, just the basic ability.
@@ -56,8 +62,17 @@ int main() {
     Ability* ability2 = ability_factory(AbilityName::Spark, AbilityName::Breach);
 
     std::cout << "Ability 0:----" << std::endl << *ability0 << "----" << std::endl;
-    std::cout << "Ability 1:----" << std::endl << ability1 << "----" << std::endl;
-    std::cout << "Ability 2:----" << std::endl << ability2 << "----" << std::endl;
+    std::cout << "Ability 1:----" << std::endl << *ability1 << "----" << std::endl;
+    std::cout << "Ability 2:----" << std::endl << *ability2 << "----" << std::endl;
+
+    ability0->activate();
+
+    ability1->activate();
+    ability1->update(0.16); // a nice looking 60 FPS
+
+    ability2->activate();
+    ability2->update(0.16);
+    ability2->end();
 
     delete ability0;
     delete ability1;

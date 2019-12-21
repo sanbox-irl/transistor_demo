@@ -24,15 +24,15 @@ namespace Spark {
       public:
         Spark() : Ability(AbilityName::Spark){};
 
-        void on_enter() override;
-        bool process(float dt) override;
-        void on_exit() override;
-
         std::vector<SparkProjectiles>& get_projectiles() {
             return m_Projectiles;
         }
 
       private:
+        void on_enter() override;
+        bool process(float dt) override;
+        void on_exit() override;
+
         // Defaults...
         float m_ProjectileVelocity = 100;
         int m_ProjectileNumber = 2;

@@ -12,6 +12,7 @@
 enum class AbilityName {
     Breach,
     Spark,
+    Help,
 
     // ..etc
     COUNT,
@@ -22,10 +23,7 @@ std::ostream& operator<<(std::ostream& out, const AbilityName& ability_name);
 
 class Ability;
 
-struct AbilityCallback {
-    AbilityName ability_name;
-    std::function<void(Ability*)> ability;
-};
+using AbilityCallback = std::function<void(Ability*)>;
 
 // This is our actual ability object. Red holds a number
 // of these, and her own logic will determine when to
@@ -40,8 +38,11 @@ class Ability {
     Ability(AbilityName name) : m_Name(name) {
     }
 
-    virtual ~Ability() {
-    }
+    friend std::ostream& operator<<(std::ostream& out, const Ability& ability);
+
+    void activate();
+    bool update(float dt);
+    void end();
 
     void attach_callback_on_enter(AbilityCallback ac) {
         callbacks_on_enter.push_back(ac);
@@ -59,6 +60,10 @@ class Ability {
         return m_Name;
     }
 
+    void register_upgrade(AbilityName abn) {
+        m_Upgrades.push_back(abn);
+    }
+
   private:
     virtual void on_enter() = 0;
     virtual bool process(float delta_time) = 0;
@@ -68,6 +73,7 @@ class Ability {
     std::vector<AbilityCallback> callbacks_on_process;
     std::vector<AbilityCallback> callbacks_on_exit;
     const AbilityName m_Name;
+    std::vector<AbilityName> m_Upgrades;
 };
 
 std::ostream& operator<<(std::ostream& out, const Ability& ability);
