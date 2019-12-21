@@ -1,7 +1,12 @@
 #pragma once
 #include "Ability.h"
 
-namespace Help {
+class Help : public Ability {
+  public:
+    Help() : Ability(AbilityName::Help){};
+
+    static void upgrade_ability(std::shared_ptr<Ability>& ability);
+
     enum class FriendType { Normal, Hardy, Small };
 
     // Just a default impl for clarity, with fields
@@ -14,23 +19,19 @@ namespace Help {
         float turn_planning;
     };
 
-    class Help : public Ability {
-      public:
-        Help() : Ability(AbilityName::Help){};
-        FriendType friend_type;
+    FriendType friend_type;
 
-        // if only it was this easy in real life
-        std::vector<Friend>& get_friends() {
-            return m_SpawnedFriends;
-        }
+    // if only it was this easy in real life
+    std::vector<Friend>& get_friends() {
+        return m_SpawnedFriends;
+    }
 
-        static void default_callback(Ability* ab);
+    static void default_callback(Ability* ab);
 
-      private:
-        void on_enter() override;
-        bool process(float dt) override;
-        void on_exit() override;
+  private:
+    void on_enter() override;
+    bool process(float dt) override;
+    void on_exit() override;
 
-        std::vector<Friend> m_SpawnedFriends;
-    };
-}
+    std::vector<Friend> m_SpawnedFriends;
+};

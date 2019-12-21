@@ -142,15 +142,14 @@
     <ClCompile Include="src\Ability Factory\Ability.cpp" />
     <ClCompile Include="src\Ability Factory\Breach.cpp" />
     <ClCompile Include="src\Ability Factory\Spark.cpp" />
-    <ClCompile Include="src\Ability Factory\UpgradeAbilities.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Ability Factory\AbilityFactory.h" />
     <ClInclude Include="src\Ability Factory\Help.h" />
     <ClInclude Include="src\Ability Factory\Ability.h" />
     <ClInclude Include="src\Ability Factory\Breach.h" />
     <ClInclude Include="src\Ability Factory\Spark.h" />
-    <ClInclude Include="src\Ability Factory\UpgradeAbilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

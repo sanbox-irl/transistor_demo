@@ -1,5 +1,6 @@
-#include "Ability Factory/UpgradeAbilities.h"
+#include "Ability Factory/AbilityFactory.h"
 #include <iostream>
+#include <memory>
 
 // This is our "factory". An imagined caller would be Red, after
 // being pinged with the requisite imagery from the UI menus.
@@ -16,21 +17,22 @@
 // how a double upgrade of an ability works. Theoretically, it should be as simple
 // as running the second block again, but no doubt there would be complications from
 // that!
-Ability* ability_factory(const AbilityName& ability_name, const AbilityName& upgrade_ability) {
-    Ability* ability = nullptr;
+std::shared_ptr<Ability> ability_factory(const AbilityName& ability_name, const AbilityName& upgrade_ability) {
+    std::shared_ptr<Ability> ability(nullptr);
+
     switch (ability_name) {
         case AbilityName::Breach:
-            ability = new Breach::Breach();
+            ability = std::make_shared<Breach>();
             break;
         case AbilityName::Spark:
-            ability = new Spark::Spark();
+            ability = std::make_shared<Spark>();
             break;
         case AbilityName::Help:
-            ability = new Help::Help();
+            ability = std::make_shared<Help>();
             break;
-        case AbilityName::NONE:
+        default:
             // Temp exception handling
-            throw "No None for main ability!";
+            throw std::exception("We require a main ability!");
     }
 
     // We're upgrading the ability here!
@@ -57,9 +59,9 @@ Ability* ability_factory(const AbilityName& ability_name, const AbilityName& upg
 }
 
 int main() {
-    Ability* ability0 = ability_factory(AbilityName::Breach, AbilityName::NONE);
-    Ability* ability1 = ability_factory(AbilityName::Breach, AbilityName::Spark);
-    Ability* ability2 = ability_factory(AbilityName::Spark, AbilityName::Breach);
+    auto ability0 = ability_factory(AbilityName::Breach, AbilityName::NONE);
+    auto ability1 = ability_factory(AbilityName::Breach, AbilityName::Spark);
+    auto ability2 = ability_factory(AbilityName::Spark, AbilityName::Breach);
 
     std::cout << "Ability 0:----" << std::endl << *ability0 << "----" << std::endl;
     std::cout << "Ability 1:----" << std::endl << *ability1 << "----" << std::endl;
@@ -68,13 +70,9 @@ int main() {
     ability0->activate();
 
     ability1->activate();
-    ability1->update(0.16); // a nice looking 60 FPS
+    ability1->update(0.16f); // a nice looking 60 FPS
 
     ability2->activate();
-    ability2->update(0.16);
+    ability2->update(0.16f);
     ability2->end();
-
-    delete ability0;
-    delete ability1;
-    delete ability2;
 }
